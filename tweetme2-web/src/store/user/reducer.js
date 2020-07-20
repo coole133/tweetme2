@@ -2,8 +2,8 @@ import { NEW_USER } from "./consts";
 
 const initialState = {
     currentUser: {
-        user: 'vladyslav',
-        canTweet: false
+        user: 'justin',
+        canTweet: true
     }
 }
 

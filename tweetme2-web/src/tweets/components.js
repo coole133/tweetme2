@@ -30,12 +30,14 @@ export function TweetsComponent(props) {
   }
 
 
-  return <div className={props.className}>
-    {user.canTweet === true && <div className='col-12 mb-3'>
+  return <div>
+    {user.canTweet === true && <div className='col-12 mb-3 m-6'>
       <form onSubmit={handleSubmit}>
-        <textarea ref={textAreaRef} required={true} className='form-control' name='tweet'>
+        <div className='mt-5'>
+          <textarea ref={textAreaRef} required={true} className='form-control' name='tweet'>
 
-        </textarea>
+          </textarea>
+        </div>
         <button type='submit' className='btn btn-primary my-3'>Tweet</button>
       </form>
     </div>
