@@ -1,10 +1,13 @@
 import React, { useEffect, useState } from 'react'
+import { useDispatch, useSelector } from "react-redux"
 
 import { apiTweetCreate, apiTweetList, apiTweetAction } from './lookup'
 
 export function TweetsComponent(props) {
+  const user = useSelector((state) => state.user.currentUser)
   const textAreaRef = React.createRef()
   const [newTweets, setNewTweets] = useState([])
+
 
   const handleBackendUpdate = (response, status) => {
     // backend api response
@@ -28,7 +31,7 @@ export function TweetsComponent(props) {
 
 
   return <div className={props.className}>
-    <div className='col-12 mb-3'>
+    {user.canTweet === true && <div className='col-12 mb-3'>
       <form onSubmit={handleSubmit}>
         <textarea ref={textAreaRef} required={true} className='form-control' name='tweet'>
 
@@ -36,11 +39,13 @@ export function TweetsComponent(props) {
         <button type='submit' className='btn btn-primary my-3'>Tweet</button>
       </form>
     </div>
+    }
     <TweetsList newTweets={newTweets} />
   </div>
 }
 
 export function TweetsList({ newTweets }) {
+  const user = useSelector((state) => state.user.currentUser)
   const [tweetsInit, setTweetsInit] = useState([])
   const [tweets, setTweets] = useState([])
   const [tweetsDidSet, setTweetsDidSet] = useState(false)
@@ -61,7 +66,7 @@ export function TweetsList({ newTweets }) {
           alert("There was an error")
         }
       }
-      apiTweetList(handleTweetListLookup)
+      apiTweetList(user.user, handleTweetListLookup)
     }
   }, [tweetsInit, tweetsDidSet, setTweetsDidSet])
 
