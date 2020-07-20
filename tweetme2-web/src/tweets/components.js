@@ -13,13 +13,13 @@ export function TweetsComponent(props) {
       createTweet(newVal, (response, status)=>{
         if (status === 201){
           tempNewTweets.unshift(response)
+          setNewTweets(tempNewTweets)
         } else {
           console.log(response)
           alert("An error occured please try again")
         }
       })
       
-      setNewTweets(tempNewTweets)
       textAreaRef.current.value = ''
     }
     return <div className={props.className}>
