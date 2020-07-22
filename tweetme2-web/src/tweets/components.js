@@ -1,11 +1,11 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useRef } from 'react'
 import { useDispatch, useSelector } from "react-redux"
 
 import { apiTweetCreate, apiTweetList, apiTweetAction } from './lookup'
 
 export function TweetsComponent(props) {
   const user = useSelector((state) => state.user.currentUser)
-  const textAreaRef = React.createRef()
+  const textAreaRef = useRef()
   const [newTweets, setNewTweets] = useState([])
 
 
@@ -126,8 +126,8 @@ export function ParentTweet({ tweet }) {
 export function Tweet({ tweet, didRetweet, hideActions }) {
   const [actionTweet, setActionTweet] = useState(tweet ? tweet : null)
   const className = 'col-10 mx-auto col-md-6'
-
-  const handlePerformAction = (newActionTweet, status) => {
+  
+  const handlePerformAction = (newActionTweet, status) =>  {
     if (status === 200) {
       setActionTweet(newActionTweet)
     } else if (status === 201) {
